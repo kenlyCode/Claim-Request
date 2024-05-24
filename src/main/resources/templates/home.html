@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/user/template::areas(~{::title},~{::main})}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home page</title>
+</head>
+<body>
+    <main>
+        <div style="position: relative" sec:authorize="hasAuthority('ROLE_EMPLOYEE')">
+            <img src="https://cdn.luatvietnam.vn/uploaded/Images/Original/2022/04/12/mau-thong-bao-lam-them-gio_1204151645.jpg">
+            <div class="text-left text-primary" style="position: absolute ; top:10% ; left: 20%; transform: translate(-50%, -50%);">
+                <h1> Welcome  <span sec:authentication="name"></span></h1>
+                <h3>to the claims request system</h3>
+            </div>
+        </div>
+        <div style="position: relative" sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <img src="https://1office.vn/wp-content/uploads/2023/09/yeu-cau-toi-thieu-ma-nhan-vien-admin-phai-co.jpg" width="100%" height="70%">
+            <div class="text-left text-white" style="position: absolute ; top:10% ; left: 20%; transform: translate(-50%, -50%);">
+                <h1> Welcome <span sec:authentication="name"></span> </h1>
+                <h3>to the claims request system</h3>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+

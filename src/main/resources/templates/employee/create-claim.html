@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/user/template::areas(~{::title},~{::main})}">
+<head>
+    <title>Create claim</title>
+</head>
+<body>
+<main>
+    <input type="hidden" id="hiddenField" name="dataDTO">
+    <div class="container-fluid pt-2">
+        <div class="main-title d-flex justify-content-between mb-2 ">
+            <div class="main-title__left">
+                <button class="btn btn-light" onclick="goBack()">
+                    <i class="fa fa-angle-left" style="color: black;"></i> Back
+                </button>
+            </div>
+            <div class="main-title__right">
+                <button class="btn btn-success" id="submitDraft">Save</button>
+            </div>
+        </div>
+        <p id="saveError" class="d-none text-danger text-center">Bạn phải tạo claimsRequest trước nha</p>
+        <table class="info-staff table table-striped table-bordered w-100 ">
+            <tr>
+                <th><h6 class="mb-0">Staff_Id :</h6></th>
+                <td><p class="mb-0" id="staffId"></p></td>
+                <th><h6 class="mb-0">Project Name :</h6></th>
+                <td>
+                    <select name="" id="projectSelect" class="form-control">
+                        <option value="">Select project :</option>
+                    </select>
+                    <span id="projectError" class="d-none text-danger">Bạn phải chọn Project trước nha</span>
+                </td>
+            </tr>
+            <tr>
+                <th><h6 class="mb-0">Staff Name :</h6></th>
+                <td><p class="mb-0" id="staffName"></p></td>
+                <th><h6 class="mb-0">Role in Project :</h6></th>
+                <td>
+                    <p class="mb-0" id="roleInProject"></p>
+                </td>
+            </tr>
+            <tr>
+                <th><h6 class="mb-0">Staff Department :</h6></th>
+                <td><p class="mb-0" id="staffDepartment"></p></td>
+                <th><h6 class="mb-0">Project Duration :</h6></th>
+                <td>
+                    <p class="mb-0" id="projectDuration"></p>
+                </td>
+            </tr>
+
+            <tr class="d-none">
+                <td id="projectId"></td><!--<p id="projectId" class="d-none"></p>-->
+                <td id="fromDateProject" ></td>
+                <td id="toDateProject" ></td>
+                <td></td>
+            </tr>
+        </table>
+        <button id="addClaimsRequest" type="button" class="btn btn-primary addMore" data-toggle=""
+                data-target="#myModal">
+            Add more claims request
+        </button>
+
+        <div class="content-table mt-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Total Hours</th>
+                    <th>Remark</th>
+                </tr>
+                </thead>
+                <tbody id="claimTable">
+                </tbody>
+            </table>
+        </div>
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Claim Details</h4>
+                        <button type="button" class="close" data-dismiss="modal" onclick="closemodal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="m-content">
+                            <div>
+                                <label for="">Date</label>
+                                <input type="date" class="form-control" id="dateInput" name="">
+                                <span style="color: red" id="dateNull" class="d-none"
+                                >Ngày tháng không được để trống</span>
+                                <span style="color: red" id="dateError" class="d-none"
+                                >Ngày tháng phải nằm trong Project Duration</span>
+
+                            </div>
+                            <div>
+                                <label for="">Day</label>
+                                <input type="text" class="form-control" id="dayInput" name="">
+                            </div>
+                        </div>
+                        <div class="m-content">
+                            <div>
+                                <label for="">From Time</label>
+                                <input type="time" class="form-control" id="fromInput" name="">
+                                <span style="color: red" id="fromTimeNull" class="d-none"
+                                >FromTime không được để trống</span>
+                                <span style="color: red" id="fromTimeError" class="d-none"
+                                >Thời gian bị chồng chéo lên các claimsRequest khác</span>
+                                <span style="color: red" id="fromTimeCK" class="d-none"
+                                >From Time phải bé thua To Time</span>
+                            </div>
+                            <div>
+                                <label for="">To Time</label>
+                                <input type="time" class="form-control" id="toInput" name="">
+                                <span style="color: red" id="toTimeNull" class="d-none"
+                                >ToTime không được để trống</span>
+                                <span style="color: red" id="toTimeError" class="d-none"
+                                >Thời gian bị chồng chéo lên các claimsRequest khác</span>
+                                <span style="color: red" id="toTimeCK" class="d-none"
+                                >To Time phải lớn hơn From Time</span>
+                            </div>
+                        </div>
+                        <div class="total-hours">
+                            <label for="">Total Hours</label>
+                            <input type="text" readonly class="form-control" id="hoursInput" name="">
+
+                            <span style="color: red" id="hoursNull" class="d-none"
+                            >Total Hours không được để trống</span>
+                            <span style="color: red" id="hoursInvalid" class="d-none"
+                            >Total Hours phải là number</span>
+                        </div>
+                        <div class="remark">
+                            <p>Remarks:</p>
+                            <textarea name="" id="remark" class="w-100" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="submitBtn-modal" class="btn btn-primary">ADD</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closemodal()">
+                            Close
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/employee/create-claim.js}"></script>
+</main>
+</body>
+</html>

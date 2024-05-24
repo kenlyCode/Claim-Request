@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<nav class="navbar navbar-light bg-primary" th:fragment="header">
+    <a class="navbar-brand" href="http://localhost:9090/home">
+        <img src="https://fpt.com/-/media/project/fpt-corporation/fpt/common/images/navigation/logo/fpt-logo.svg" alt=""
+             width="100" height="45">
+    </a>
+    <div>
+        <a class="btn btn-primary " href="http://localhost:9090/logout">
+            <i class="fas fa-sign-out-alt"></i>
+            Log Out
+        </a>
+    </div>
+</nav>
+
+<p class=" bg-primary" th:fragment="footer">design by MinhDQ25 </p>
+
+
+<ul class="list-group rounded-0 p-3" th:fragment="navigation" >
+    <!-- claim -->
+    <li class="list-group-item p-0">
+        <button class="btn rounded-0  text-left w-100" id="showChoose" sec:authorize="hasAuthority('ROLE_EMPLOYEE')">
+            <i class="fas fa-user"></i> Claimer
+        </button>
+        <button class="btn rounded-0  text-left w-100" id="admin-show" sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <i class="fas fa-user"></i> View Claims Request
+        </button>
+
+        <ul class="rounded-0 m-0 w-100 p-0 list-group" >
+            <li class="list-group-item pl-3 p-0" style="display: none" id="createclamms" sec:authorize="hasAuthority('ROLE_EMPLOYEE')">
+                <a href="http://localhost:9090/employee/create-claim" class="btn rounded-0  text-left w-100">
+                    <i class="fas fa-plus"></i> Create Claims
+                </a>
+            </li>
+
+            <li class="list-group-item p-0 pl-3" style="display: none" id="myclaims">
+                <div class="btn-group dropright w-100">
+
+                    <button type="button" class="btn w-100 rounded-0 text-left" data-toggle="dropdown"
+                            aria-expanded="false" sec:authorize="hasAuthority('ROLE_EMPLOYEE')">
+                        <i class="fas fa-folder-open"></i> My Claims
+                    </button>
+
+                    <button type="button" class="btn w-100 rounded-0 text-left" data-toggle="dropdown"
+                            aria-expanded="false" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <i class="fas fa-folder-open"></i> View by Status
+                    </button>
+                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </button>
+                    <div class="dropdown-menu p-0 ml-4" >
+                        <ul class="rounded-0 m-0 w-100 p-0 list-group">
+                            <li class="list-group-item p-0" sec:authorize="hasAuthority('ROLE_EMPLOYEE') or hasAuthority('ROLE_ADMIN')">
+                                <a href="http://localhost:9090/employee/view-claim-draft"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_EMPLOYEE')">
+                                    <i class="fab fa-firstdraft"></i> Draft
+                                </a>
+                                <a href="http://localhost:9090/admin/view-claim-draft"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                                    <i class="fab fa-firstdraft"></i> Draft
+                                </a>
+
+                            </li>
+                            <li class="list-group-item p-0" sec:authorize="hasAuthority('ROLE_EMPLOYEE') or hasAuthority('ROLE_ADMIN')">
+                                <a href="http://localhost:9090/employee/view-claim-pending-approval"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_EMPLOYEE')">
+                                    <i class="fas fa-spinner"></i> Pending Approval
+                                </a>
+
+                                <a href="http://localhost:9090/admin/view-claim-pending-approval"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                                    <i class="fas fa-spinner"></i> Pending Approval
+                                </a>
+
+                            </li>
+
+                            <li class="list-group-item p-0" sec:authorize="hasAuthority('ROLE_EMPLOYEE') or hasAuthority('ROLE_ADMIN')">
+                                <a href="http://localhost:9090/employee/view-claim-approved"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_EMPLOYEE')">
+                                    <i class="fas fa-check-circle"></i> Approved
+                                </a>
+
+                                <a href="http://localhost:9090/admin/view-claim-approved"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                                    <i class="fas fa-check-circle"></i> Approved
+                                </a>
+
+                            </li>
+
+                            <li class="list-group-item p-0" sec:authorize="hasAuthority('ROLE_EMPLOYEE') or hasAuthority('ROLE_ADMIN')">
+                                <a href="http://localhost:9090/employee/view-claim-paid"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_EMPLOYEE')">
+                                    <i class="fas fa-file-invoice-dollar"></i> Paid
+                                </a>
+                                <a href="http://localhost:9090/admin/view-claim-paid"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                                    <i class="fas fa-file-invoice-dollar"></i> Paid
+                                </a>
+                            </li>
+
+                            <li class="list-group-item p-0" sec:authorize="hasAuthority('ROLE_EMPLOYEE') or hasAuthority('ROLE_ADMIN')">
+                                <a href="http://localhost:9090/employee/view-claim-cancelled"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_EMPLOYEE')">
+                                    <i class="fas fa-window-close"></i> Rejected or Cancelled
+                                </a>
+                                <a href="http://localhost:9090/admin/view-claim-cancelled"
+                                   class="btn rounded-0  text-left w-100" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                                    <i class="fas fa-window-close"></i> Rejected or Cancelled
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+    <!-- approver -->
+    <li class="list-group-item p-0" sec:authorize="hasAuthority('ROLE_APPROVER')">
+        <button
+                class="btn rounded-0  text-left w-100"
+                id="showChoose_Approver"
+        >
+            <i class="fas fa-chalkboard-teacher"></i> Approver
+        </button>
+
+        <ul class="rounded-0 m-0 w-100 p-0 list-group">
+            <li class="list-group-item p-0 pl-3" style="display: none" id="Approval_claim">
+                <div class="btn-group dropright w-100">
+                    <button type="button" class="btn w-100 rounded-0 text-left" data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-folder-open"></i> Claims for Approval
+                    </button>
+                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </button>
+                    <div class="dropdown-menu p-0 ml-4">
+                        <ul class="rounded-0 m-0 w-100 p-0 list-group">
+                            <li class="list-group-item p-0">
+                                <a href="http://localhost:9090/approver/approve-claim" class="btn rounded-0  text-left w-100">
+                                    <i class="fab fa-firstdraft"></i> For My Vetting
+                                </a>
+                            </li>
+                            <li class="list-group-item p-0">
+                                <a href="http://localhost:9090/approver/view-claim-approved-or-paid" class="btn rounded-0  text-left w-100">
+                                    <i class="fas fa-question-circle"></i> Approved or Paid
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+    <!-- Finance -->
+    <li class="list-group-item p-0" sec:authorize="hasAuthority('ROLE_FINANCE')">
+        <button
+                class="btn rounded-0  text-left w-100"
+                id="showChoose_Finance"
+        >
+            <i class="fas fa-hand-holding-usd"></i> Finance
+        </button>
+
+        <ul class="rounded-0 m-0 w-100 p-0 list-group" >
+            <li class="list-group-item p-0 pl-3" style="display: none" id="Finance_claim">
+                <div class="btn-group dropright w-100">
+                    <button type="button" class="btn w-100 rounded-0 text-left" data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-folder-open"></i> Claims for Finance
+                    </button>
+                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </button>
+                    <div class="dropdown-menu p-0 ml-4">
+                        <ul class="rounded-0 m-0 w-100 p-0 list-group">
+                            <li class="list-group-item p-0">
+                                <a href="http://localhost:9090/finance/paid-claim"
+                                   class="btn rounded-0  text-left w-100">
+                                    <i class="fas fa-check-circle"></i> Approved
+                                </a>
+                            </li>
+                            <li class="list-group-item p-0">
+                                <a href="http://localhost:9090/finance/view-claim-paid"
+                                   class="btn rounded-0  text-left w-100">
+                                    <i class="fas fa-times-circle"></i> Paid
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+    <!-- Admin manage -->
+    <li class="list-group-item p-0" sec:authorize="hasAuthority('ROLE_ADMIN')">
+        <button
+                class="btn rounded-0  text-left w-100"
+                id="showChoose_Admin"
+        >
+            <i class="fas fa-user-shield"></i> Administrator
+        </button>
+
+        <ul class="rounded-0 m-0 w-100 p-0 list-group" >
+            <li class="list-group-item p-0 pl-3" style="display: none" id="Admin_claim">
+                <div class="btn-group dropright w-100">
+                    <button type="button" class="btn w-100 rounded-0 text-left" data-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="fas fa-folder-open"></i> Configuration
+                    </button>
+                    <button type="button" class="btn dropdown-toggle dropdown-toggle-split">
+                        <span class="sr-only">Toggle Dropright</span>
+                    </button>
+                    <div class="dropdown-menu p-0 ml-4">
+                        <ul class="rounded-0 m-0 w-100 p-0 list-group">
+                            <li class="list-group-item p-0">
+                                <a href="http://localhost:9090/admin/view-all-staff"
+                                   class="btn rounded-0  text-left w-100">
+                                    <i class="fas fa-id-card"></i> Staff Information
+                                </a>
+                            </li>
+                            <li class="list-group-item p-0 w-100">
+                                <a href="http://localhost:9090/admin/view-all-project"
+                                   class="btn rounded-0  text-left ">
+                                    <i class="fas fa-project-diagram"></i> Project Information
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
+<script th:fragment="script">
+    $(document).ready(function () {
+        $("#showChoose").click(function () {
+            $("#createclamms").toggle();
+            $("#myclaims").toggle();
+
+        });
+
+        $("#admin-show").click(function () {
+            $("#createclamms").toggle();
+            $("#myclaims").toggle();
+
+        });
+
+
+        $("#showChoose_Approver").click(function () {
+            $("#Approval_claim").toggle();
+
+        });
+
+        $("#showChoose_Finance").click(function () {
+            $("#Finance_claim").toggle();
+
+        });
+
+        $("#showChoose_Admin").click(function () {
+            $("#Admin_claim").toggle();
+
+        });
+    });
+</script>
+</html>

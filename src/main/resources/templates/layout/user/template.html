@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:fragment="areas(title,content)"
+>
+<head>
+    <title th:replace="${title}"></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+            integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/table.css}"/>
+</head>
+<body>
+
+<header th:insert="~{layout/user/frags::header}">
+</header>
+
+<section class="d-flex min-vh-100">
+    <nav class="bg-light w-25" th:insert="~{layout/user/frags::navigation}">
+    </nav>
+
+    <article class="container-fluid border-top p-2 w-100" th:insert="${content}">
+    </article>
+</section>
+
+
+<footer th:insert="~{layout/user/frags::footer}">
+</footer>
+<script th:replace="~{layout/user/frags::script}"></script>
+
+</body>
+</html>
+

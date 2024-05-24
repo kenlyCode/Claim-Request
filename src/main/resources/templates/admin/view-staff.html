@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/user/template::areas(~{::title},~{::main})}">
+<head>
+    <title>View Staff</title>
+</head>
+<body>
+<main>
+    <div class="container border rounded p-5">
+        <h1 class="border-bottom pb-3 mb-4">View and Update Staff</h1>
+        <form id="oneStaffView" th:action="@{'/admin/view-staff/' + ${staffViewDTO.id}}" th:object="${staffViewDTO}"
+              method="post">
+            <div class="form-group">
+                <label>Id</label>
+                <input type="number" class="form-control" id="id" th:field="*{id}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Staff name</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Department</label>
+                <input type="text" class="form-control" id="department" th:field="*{department}" required/>
+            </div>
+            <div class="form-group">
+                <label>Job rank</label>
+                <select id="rank" class="form-control" th:field="*{rank}" required >
+                    <option th:value="sameAsBefore"><---------- Choose another rank if you want to change ---------->
+                    </option>
+                    <option th:value="Staff" th:text="Staff"></option>
+                    <option th:value="Finance" th:text="Finance"></option>
+                    <option th:value="Admin" th:text="Admin"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Salary</label>
+                <input type="number" class="form-control" id="salary" th:field="*{salary}" required/>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" readonly/>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" id="password" th:field="*{password}"
+                       placeholder="Please enter this field and Re-Password field if you want to change your password!"/>
+            </div>
+            <div class="form-group">
+                <label>Re-Password</label>
+                <input type="password" class="form-control" th:field="*{rePassword}"
+                       placeholder="Please enter this field and Password field if you want to change your password!"/>
+            </div>
+            <div class="pt-3 d-flex justify-content-between">
+                <button type="button" class="btn btn-danger" onclick="history.back()">
+                    Back
+                </button>
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+
+        </form>
+    </div>
+    <script th:src="@{/js/admin/view-staff.js}"></script>
+</main>
+</body>
+</html>

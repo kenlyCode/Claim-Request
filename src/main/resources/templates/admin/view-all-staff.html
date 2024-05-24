@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/user/template::areas(~{::title},~{::main})}">
+<head>
+    <title>View All Staff</title>
+</head>
+<body>
+<main>
+    <div class="container border rounded p-5">
+        <div  th:if="${existMessage}" class="border rounded bg-success text-white text-center mb-3 p-2">
+            <span th:text="${message}"></span>
+        </div>
+        <h1 class="border-bottom pb-3 mb-4">Staff Information</h1>
+        <div class="mb-3">
+            <a href="http://localhost:9090/admin/create-staff"
+               class="btn btn-success">
+                <i class="fas fa-address-card"></i></i> Create a new Staff
+            </a>
+        </div>
+        <table id="allStaff" class="table table-striped table-bordered" style="width:100%">
+            <thead class="bg-info">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Job Rank</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script th:src="@{/js/admin/view-all-staff.js}"></script>
+</main>
+</body>
+</html>
